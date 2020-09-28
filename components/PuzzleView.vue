@@ -2,22 +2,34 @@
   <section>
     <div class="card" id="puzzle">
       <div class="card-content">
-        <span class="card-title font-serif">問題</span>
-        <span class="content-text">ああああ<br />なぜ？</span>
+        <div v-if="!puzzle.title" class="progress">
+          <div class="indeterminate"></div>
+        </div>
+        <span class="card-title font-serif">{{ puzzle.title }}</span>
+        <span class="content-text">{{ puzzle.puzzle }}</span>
       </div>
     </div>
   </section>
 </template>
 <script>
 export default {
+  props: {
+    puzzle: {
+      title: String,
+      puzzle: String,
+      reference: String,
+    },
+  },
   components: {},
 };
 </script>
 <style scoped>
 #puzzle {
-  background: url("~assets/frame.jpg");
   background-size: 100% 100%;
   min-height: 300px;
+  margin: 1em;
+  box-shadow: 0.5em -0.5em gray, -0.5em 0.5em gray,
+    0.5em 0.5em indianred, -0.5em -0.5em indianred;
 }
 .card {
   display: flex;

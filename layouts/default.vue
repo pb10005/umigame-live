@@ -1,6 +1,11 @@
 <template>
   <div class="">
     <Nuxt />
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="">© 2020 Copyright 人参</div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -16,7 +21,7 @@ html {
   box-sizing: border-box;
   color: #2E495E;
   background: url("~assets/tile.jpg");
-  background-size: 20px;
+  background-size: auto;
 }
 
 .font-serif {
