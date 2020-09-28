@@ -12,7 +12,7 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "Official Nuxt.js starter for CodeSandBox"
+        content: "ウミガメのスープ配信プラットフォーム"
       }
     ],
     link: [
