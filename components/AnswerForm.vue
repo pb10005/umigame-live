@@ -1,7 +1,7 @@
 <template>
-  <section class="card">
+  <section class="card" id="answer">
     <div class="card-content">
-      <div>{{ question }}</div>
+      <div class="content-text">{{ question }}</div>
     </div>
     <div class="card-action">
       <a class="waves-effect waves-light btn-large" @click="trueAns">正解</a>
@@ -44,4 +44,9 @@ export default {
 };
 </script>
 <style scoped>
+#answer {
+  margin: 2em 1em;
+  box-shadow: 0.5em -0.5em gray, -0.5em 0.5em gray, 0.5em 0.5em indianred,
+    -0.5em -0.5em indianred;
+}
 </style>

@@ -38,9 +38,6 @@ export default {
     };
   },
   mounted() {
-    this.speech = new SpeechSynthesisUtterance();
-    this.speech.lang = "ja";
-
     db.collection("puzzles")
       .doc("coruhOL4bqrgnpq3nDvg")
       .get()
@@ -60,7 +57,8 @@ export default {
   },
   methods: {
     onQuestionSelected(item) {
-      if (!this.speech) this.speech = new SpeechSynthesisUtterance();
+      this.speech = new SpeechSynthesisUtterance();
+      this.speech.lang = "ja";
       this.speech.text = item;
       window.speechSynthesis.speak(this.speech);
       this.currentQuestion = item;
