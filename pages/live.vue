@@ -73,7 +73,6 @@ export default {
   left: 0;
   width: 30%;
   height: 100%;
-  padding: 5px;
 }
 #puzzle-view {
   position: fixed;

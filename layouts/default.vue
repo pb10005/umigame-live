@@ -49,35 +49,4 @@ html {
   align-items: center;
   text-align: center;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #00C48D;
-  color: #00C48D;
-  text-decoration: none;
-  padding: 10px 30px;
-  display: inline-flex;
-  align-self: center;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #00C48D;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #2E495E;
-  color: #2E495E;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #2E495E;
-}
 </style>
