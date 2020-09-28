@@ -1,9 +1,9 @@
 <template>
   <section class="container">
-    <chat-view id="chat-view" />
+    <chat-view id="chat-view"/>
     <div id="puzzle-view">
-      <puzzle-view />
-      <answer-form />
+      <puzzle-view/>
+      <answer-form/>
     </div>
   </section>
 </template>
@@ -15,8 +15,8 @@ export default {
   components: {
     AnswerForm,
     ChatView,
-    PuzzleView,
-  },
+    PuzzleView
+  }
 };
 </script>
 <style scoped>

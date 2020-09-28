@@ -11,7 +11,7 @@
             type="text"
             class="validate"
             data-length="100"
-          />
+          >
           <label for="title">タイトル</label>
         </div>
 
@@ -42,13 +42,14 @@
             type="text"
             class="validate"
             data-length="100"
-          />
+          >
           <label for="ref">引用元URL(あれば)</label>
+          <span class="helper-text">既出の問題の場合は出典を明記しましょう</span>
         </div>
       </div>
       <div class="card-action">
-        <a>キャンセル</a>
-        <a>登録</a>
+        <a href="#" @click="cancel">キャンセル</a>
+        <a href="#" @click="create">確認画面へ</a>
       </div>
     </div>
   </section>
@@ -61,9 +62,18 @@ export default {
         title: "",
         puzzle: "",
         answer: "",
-        reference: "",
-      },
+        reference: ""
+      }
     };
   },
+  methods: {
+    create() {
+      this.$store.commit("create/setPuzzle", this.puzzle);
+      this.$router.push("/create/confirm");
+    },
+    cancel() {
+      this.$router.push("/");
+    }
+  }
 };
 </script>
