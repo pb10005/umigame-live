@@ -11,7 +11,7 @@
             type="text"
             class="validate"
             data-length="100"
-          >
+          />
           <label for="title">タイトル</label>
         </div>
 
@@ -42,9 +42,11 @@
             type="text"
             class="validate"
             data-length="100"
-          >
+          />
           <label for="ref">引用元URL(あれば)</label>
-          <span class="helper-text">既出の問題の場合は出典を明記しましょう</span>
+          <span class="helper-text"
+            >既出の問題の場合は出典を明記しましょう</span
+          >
         </div>
       </div>
       <div class="card-action">
@@ -62,8 +64,8 @@ export default {
         title: "",
         puzzle: "",
         answer: "",
-        reference: ""
-      }
+        reference: "",
+      },
     };
   },
   methods: {
@@ -73,7 +75,7 @@ export default {
     },
     cancel() {
       this.$router.push("/");
-    }
-  }
+    },
+  },
 };
 </script>

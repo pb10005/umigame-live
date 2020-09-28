@@ -1,7 +1,7 @@
 <template>
-  <section class="card" id="answer">
+  <section class="card grey lighten-4" id="answer">
     <div class="card-content">
-      <div class="content-text">{{ question }}</div>
+      <div class="content-text teal-text lighten-2">{{ question }}</div>
     </div>
     <div class="card-action">
       <a class="waves-effect waves-light btn-large" @click="trueAns">正解</a>

@@ -21,7 +21,7 @@ html {
   box-sizing: border-box;
   color: #2E495E;
   background: url("~assets/tile.jpg");
-  background-size: auto;
+  background-size: 200px;
 }
 
 .font-serif {
