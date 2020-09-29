@@ -1,11 +1,6 @@
 <template>
   <div class="">
     <Nuxt />
-    <footer class="page-footer">
-      <div class="footer-copyright">
-        <div class="">© 2020 Copyright 人参</div>
-      </div>
-    </footer>
   </div>
 </template>
 

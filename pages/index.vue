@@ -9,8 +9,23 @@
 </template>
 
 <script>
+import firebase from "~/plugins/firebase";
 export default {
   components: {},
+  mounted() {
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        return firebase
+          .auth()
+          .signInAnonymously()
+          .catch((err) => {
+            alert(1);
+          });
+      });
+  },
+  methods: {},
 };
 </script>
 

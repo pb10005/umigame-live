@@ -1,13 +1,28 @@
 <template>
   <section class="container">
-    <chat-view
-      :questions="questions"
-      id="chat-view"
-      @question-selected="onQuestionSelected"
-    />
+    <ul id="chat-view" class="collection with-header">
+      <li class="collection-header">
+        <div class="switch">
+          <label>
+            すべて
+            <input type="checkbox" />
+            <span class="lever"></span>
+            未回答
+          </label>
+        </div>
+      </li>
+      <chat-view
+        :questions="questions"
+        @question-selected="onQuestionSelected"
+      />
+    </ul>
     <div id="puzzle-view">
       <puzzle-view :puzzle="puzzle" />
-      <answer-form :question="currentQuestion" v-if="currentQuestion" />
+      <answer-form
+        :puzzleId="puzzleId"
+        :question="currentQuestion"
+        v-if="currentQuestion.id"
+      />
     </div>
   </section>
 </template>
@@ -23,9 +38,17 @@ export default {
     ChatView,
     PuzzleView,
   },
+  computed: {
+    puzzleId() {
+      return this.$route.query.puzzle;
+    },
+  },
   data() {
     return {
-      currentQuestion: "",
+      currentQuestion: {
+        id: "",
+        content: "",
+      },
       speech: null,
       synth: null,
       puzzle: {
@@ -35,31 +58,41 @@ export default {
         reference: "",
       },
       questions: [],
+      unsubscribe: () => {},
     };
   },
   mounted() {
     db.collection("puzzles")
-      .doc("coruhOL4bqrgnpq3nDvg")
+      .doc(this.puzzleId)
       .get()
       .then((doc) => {
         this.puzzle = doc.data();
       });
 
-    db.collection("puzzles")
-      .doc("coruhOL4bqrgnpq3nDvg")
+    this.unsubscribe = db
+      .collection("puzzles")
+      .doc(this.puzzleId)
       .collection("questions")
       .onSnapshot((docs) => {
         this.questions = [];
         docs.forEach((doc) => {
-          this.questions.push(doc.data());
+          let data = {
+            id: doc.id,
+            content: doc.data().content,
+            answer: doc.data().answer,
+          };
+          this.questions.push(data);
         });
       });
+  },
+  destroyed() {
+    this.unsubscribe();
   },
   methods: {
     onQuestionSelected(item) {
       this.speech = new SpeechSynthesisUtterance();
       this.speech.lang = "ja";
-      this.speech.text = item;
+      this.speech.text = item.content;
       window.speechSynthesis.speak(this.speech);
       this.currentQuestion = item;
     },
@@ -73,6 +106,7 @@ export default {
   left: 0;
   width: 30%;
   height: 100%;
+  overflow-y: auto;
 }
 #puzzle-view {
   position: fixed;

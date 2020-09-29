@@ -1,20 +1,90 @@
 <template>
   <section class="container">
-    <chat-view id="chat-view" />
-    <question-form id="question-form" />
-    <puzzle-view id="puzzle-view" />
+    <ul id="chat-view" class="collection with-header">
+      <li class="collection-header">
+        <div class="switch">
+          <label>
+            すべて
+            <input type="checkbox" />
+            <span class="lever"></span>
+            未回答
+          </label>
+        </div>
+      </li>
+      <chat-view :questions="questions" />
+    </ul>
+
+    <question-form id="question-form" @submit="submit" />
+    <puzzle-view id="puzzle-view" :puzzle="puzzle" />
   </section>
 </template>
 <script>
 import ChatView from "@/components/ChatView";
 import PuzzleView from "@/components/PuzzleView";
 import QuestionForm from "@/components/QuestionForm";
+import firebase from "~/plugins/firebase";
+const db = firebase.firestore();
 
 export default {
   components: {
     ChatView,
     PuzzleView,
     QuestionForm,
+  },
+  computed: {
+    puzzleId() {
+      return this.$route.query.puzzle;
+    },
+  },
+  data() {
+    return {
+      currentQuestion: "",
+      speech: null,
+      synth: null,
+      puzzle: {
+        title: "",
+        puzzle: "",
+        answer: "",
+        reference: "",
+      },
+      questions: [],
+      unsubscribe: () => {},
+    };
+  },
+  mounted() {
+    db.collection("puzzles")
+      .doc(this.puzzleId)
+      .get()
+      .then((doc) => {
+        this.puzzle = doc.data();
+      });
+
+    this.unsubscribe = db
+      .collection("puzzles")
+      .doc(this.puzzleId)
+      .collection("questions")
+      .onSnapshot((docs) => {
+        this.questions = [];
+        docs.forEach((doc) => {
+          let data = {
+            id: doc.id,
+            content: doc.data().content,
+            answer: doc.data().answer,
+          };
+          this.questions.push(data);
+        });
+      });
+  },
+  destroyed() {
+    this.unsubscribe();
+  },
+  methods: {
+    submit(question) {
+      if (!question) return;
+      db.collection("puzzles").doc(this.puzzleId).collection("questions").add({
+        content: question,
+      });
+    },
   },
 };
 </script>
@@ -24,19 +94,25 @@ export default {
   top: 0;
   left: 0;
   width: 30%;
-  height: 100%;
+  bottom: 0;
+  overflow-y: auto;
 }
 #puzzle-view {
   position: fixed;
   top: 0;
   left: 30%;
   width: 70%;
-  height: 100%;
 }
 #question-form {
   position: fixed;
-  left: 0;
+  left: 30%;
   bottom: 0;
-  width: 30%;
+  width: 70%;
+}
+
+#question-button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }
 </style>
