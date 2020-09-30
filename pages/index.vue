@@ -2,7 +2,7 @@
   <section class="container">
     <div>
       <p class="font-serif heading">海亀LIVE</p>
-      <nuxt-link class="btn" to="/create">出題する</nuxt-link>
+      <nuxt-link class="btn" to="/dashboard">出題する</nuxt-link>
       <nuxt-link class="btn" to="/play/entry">参加する</nuxt-link>
     </div>
   </section>
@@ -13,7 +13,7 @@ import firebase from "~/plugins/firebase";
 export default {
   components: {},
   mounted() {
-    if (firebase.auth().currentUser.uid) return;
+    if (firebase.auth().currentUser !== null) return;
     firebase
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.LOCAL)

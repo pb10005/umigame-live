@@ -33,7 +33,7 @@ export default {
       this.$router.push("/");
     },
     join() {
-      this.$router.push("/live?puzzle=" + this.puzzleId);
+      this.$router.push("/play?puzzle=" + this.puzzleId);
     },
   },
 };
