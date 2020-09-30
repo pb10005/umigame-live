@@ -63,6 +63,7 @@ export default {
       .collection("puzzles")
       .doc(this.puzzleId)
       .collection("questions")
+      .orderBy("timestamp")
       .onSnapshot((docs) => {
         this.questions = [];
         docs.forEach((doc) => {
@@ -83,6 +84,7 @@ export default {
       if (!question) return;
       db.collection("puzzles").doc(this.puzzleId).collection("questions").add({
         content: question,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     },
   },

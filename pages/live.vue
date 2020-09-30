@@ -67,12 +67,16 @@ export default {
       .get()
       .then((doc) => {
         this.puzzle = doc.data();
+        if (this.puzzle.author !== firebase.auth().currentUser.uid) {
+          this.$router.push("/play?puzzle=" + this.puzzleId);
+        }
       });
 
     this.unsubscribe = db
       .collection("puzzles")
       .doc(this.puzzleId)
       .collection("questions")
+      .orderBy("timestamp")
       .onSnapshot((docs) => {
         this.questions = [];
         docs.forEach((doc) => {

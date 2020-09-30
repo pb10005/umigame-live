@@ -50,8 +50,8 @@
         </div>
       </div>
       <div class="card-action">
-        <a href="#" @click="cancel">キャンセル</a>
-        <a href="#" @click="create">確認画面へ</a>
+        <a href="#" @click.prevent="cancel">キャンセル</a>
+        <a href="#" @click.prevent="create">確認画面へ</a>
       </div>
     </div>
   </section>
