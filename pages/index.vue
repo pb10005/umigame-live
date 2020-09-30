@@ -13,16 +13,15 @@ import firebase from "~/plugins/firebase";
 export default {
   components: {},
   mounted() {
+    if (firebase.auth().currentUser.uid) return;
     firebase
       .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then(() => {
         return firebase
           .auth()
           .signInAnonymously()
-          .catch((err) => {
-            alert(1);
-          });
+          .catch((err) => {});
       });
   },
   methods: {},
