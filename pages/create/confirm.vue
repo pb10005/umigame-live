@@ -29,6 +29,9 @@ export default {
       this.puzzle.author = firebase.auth().currentUser.uid;
       db.collection("puzzles")
         .add(this.puzzle)
+        .then(() => {
+          this.$router.push("/dashboard");
+        })
         .catch(() => {
           this.$router.push("/create");
         });

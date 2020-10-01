@@ -15,7 +15,12 @@
     </ul>
 
     <question-form id="question-form" @submit="submit" />
-    <puzzle-view id="puzzle-view" :puzzle="puzzle" />
+    <div id="puzzle-view">
+      <a href="#" @click="$router.push('/')"
+        ><i class="material-icons">arrow_back</i></a
+      >
+      <puzzle-view :puzzle="puzzle" />
+    </div>
   </section>
 </template>
 <script>

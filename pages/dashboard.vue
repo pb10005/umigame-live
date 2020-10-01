@@ -12,6 +12,7 @@
             <nuxt-link :to="`/live?puzzle=${item.id}`">{{
               item.title
             }}</nuxt-link>
+            <span>{{ origin }}/play?puzzle={{ item.id }}</span>
           </li>
         </ul>
       </div>
@@ -22,6 +23,11 @@
 import firebase from "~/plugins/firebase";
 const db = firebase.firestore();
 export default {
+  computed: {
+    origin() {
+      return window.location.origin;
+    },
+  },
   data() {
     return {
       puzzles: [],
