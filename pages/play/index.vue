@@ -16,7 +16,7 @@
 
     <question-form id="question-form" @submit="submit" />
     <div id="puzzle-view">
-      <a href="#" @click="$router.push('/')"
+      <a class="align-left" href="#" @click="$router.push('/')"
         ><i class="material-icons">arrow_back</i></a
       >
       <puzzle-view :puzzle="puzzle" />
@@ -109,6 +109,7 @@ export default {
   top: 0;
   left: 30%;
   width: 70%;
+  text-align: left;
 }
 #question-form {
   position: fixed;

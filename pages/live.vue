@@ -17,7 +17,7 @@
       />
     </ul>
     <div id="puzzle-view">
-      <a href="#" @click="$router.push('/')"
+      <a class="align-left" href="#" @click="$router.push('/')"
         ><i class="material-icons">arrow_back</i></a
       >
       <puzzle-view :puzzle="puzzle" />
@@ -122,5 +122,6 @@ export default {
   width: 70%;
   height: 100%;
   padding: 5px;
+  text-align: left;
 }
 </style>

@@ -63,6 +63,10 @@ export default {
 };
 </script>
 <style scoped>
+.card {
+  justify-content: center;
+  text-align: center;
+}
 #answer {
   margin: 2em 1em;
   box-shadow: 0.5em -0.5em gray, -0.5em 0.5em gray, 0.5em 0.5em indianred,

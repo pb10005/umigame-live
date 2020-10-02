@@ -44,4 +44,8 @@ html {
   align-items: center;
   text-align: center;
 }
+
+.align-left {
+  text-align: left;
+}
 </style>
