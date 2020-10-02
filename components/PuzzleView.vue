@@ -9,6 +9,7 @@
         <span class="content-text teal-text lighten-2">{{
           puzzle.puzzle
         }}</span>
+        <div class="card-actions">出典：{{ puzzle.reference }}</div>
       </div>
     </div>
   </section>
