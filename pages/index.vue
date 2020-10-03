@@ -9,21 +9,10 @@
 </template>
 
 <script>
-import firebase from "~/plugins/firebase";
 export default {
+  middleware: ["auth"],
   components: {},
-  mounted() {
-    if (firebase.auth().currentUser !== null) return;
-    firebase
-      .auth()
-      .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-      .then(() => {
-        return firebase
-          .auth()
-          .signInAnonymously()
-          .catch((err) => {});
-      });
-  },
+  mounted() {},
   methods: {},
 };
 </script>

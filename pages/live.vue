@@ -36,6 +36,7 @@ import PuzzleView from "@/components/PuzzleView";
 import firebase from "~/plugins/firebase";
 const db = firebase.firestore();
 export default {
+  middleware: ["auth"],
   components: {
     AnswerForm,
     ChatView,
