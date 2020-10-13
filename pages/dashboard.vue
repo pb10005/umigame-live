@@ -23,6 +23,7 @@
 import firebase from "~/plugins/firebase";
 const db = firebase.firestore();
 export default {
+  middleware: ["auth"],
   computed: {
     origin() {
       return window.location.origin;

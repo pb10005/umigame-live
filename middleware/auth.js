@@ -1,13 +1,5 @@
 import firebase from "~/plugins/firebase";
-export default function ({ redirect }) {
+export default function ({ router, redirect }) {
   if (firebase.auth().currentUser !== null) return;
-  firebase
-    .auth()
-    .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .then(() => {
-      return firebase
-        .auth()
-        .signInAnonymously()
-        .catch((err) => {});
-    });
+  return redirect("/");
 }
