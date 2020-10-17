@@ -19,7 +19,7 @@
       <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
-      <puzzle-view :puzzle="puzzle" />
+      <puzzle-view :puzzle="puzzle" :status="status" />
     </div>
   </section>
 </template>
@@ -53,8 +53,9 @@ export default {
         answer: "",
         reference: "",
       },
+      status: "",
       questions: [],
-      unsubscribe: () => {},
+      unsubscribe: [],
     };
   },
   mounted() {
@@ -65,22 +66,32 @@ export default {
         this.puzzle = doc.data();
       });
 
-    this.unsubscribe = db
-      .collection("puzzles")
-      .doc(this.puzzleId)
-      .collection("questions")
-      .orderBy("timestamp")
-      .onSnapshot((docs) => {
-        this.questions = [];
-        docs.forEach((doc) => {
-          let data = {
-            id: doc.id,
-            content: doc.data().content,
-            answer: doc.data().answer,
-          };
-          this.questions.push(data);
-        });
-      });
+    this.unsubscribe.push(
+      db
+        .collection("puzzles")
+        .doc(this.puzzleId)
+        .onSnapshot((doc) => {
+          this.status = doc.data().status;
+        })
+    );
+    this.unsubscribe.push(
+      db
+        .collection("puzzles")
+        .doc(this.puzzleId)
+        .collection("questions")
+        .orderBy("timestamp")
+        .onSnapshot((docs) => {
+          this.questions = [];
+          docs.forEach((doc) => {
+            let data = {
+              id: doc.id,
+              content: doc.data().content,
+              answer: doc.data().answer,
+            };
+            this.questions.push(data);
+          });
+        })
+    );
   },
   destroyed() {
     this.unsubscribe();

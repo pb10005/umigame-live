@@ -48,4 +48,8 @@ html {
 .align-left {
   text-align: left;
 }
+
+.multiline {
+  white-space: pre-wrap;
+}
 </style>

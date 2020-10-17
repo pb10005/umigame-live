@@ -4,8 +4,8 @@
       <div class="card-content">
         <span class="card-title font-serif">問題を確認</span>
         <p>タイトル：{{ puzzle.title }}</p>
-        <p>問題文：{{ puzzle.puzzle }}</p>
-        <p>解説：{{ puzzle.answer }}</p>
+        <p class="multiline">問題文：{{ puzzle.puzzle }}</p>
+        <p class="multiline">解説：{{ puzzle.answer }}</p>
         <p>引用元：{{ puzzle.reference }}</p>
       </div>
       <div class="card-action">

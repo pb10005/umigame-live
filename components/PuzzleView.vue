@@ -6,7 +6,12 @@
           <div class="indeterminate"></div>
         </div>
         <span class="card-title font-serif">{{ puzzle.title }}</span>
-        <span class="content-text teal-text lighten-2">{{
+        <span
+          v-if="status === 'solution'"
+          class="content-text teal-text lighten-2 multiline"
+          >{{ puzzle.answer }}</span
+        >
+        <span v-else class="content-text teal-text lighten-2 multiline">{{
           puzzle.puzzle
         }}</span>
         <div class="card-actions">出典：{{ puzzle.reference }}</div>
@@ -22,6 +27,7 @@ export default {
       puzzle: String,
       reference: String,
     },
+    status: String,
   },
   components: {},
 };

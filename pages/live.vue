@@ -20,7 +20,8 @@
       <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
-      <puzzle-view :puzzle="puzzle" />
+      <a href="#" @click="showSolution">解説を出す</a>
+      <puzzle-view :puzzle="puzzle" :status="status" />
       <answer-form
         :puzzleId="puzzleId"
         :question="currentQuestion"
@@ -61,8 +62,9 @@ export default {
         answer: "",
         reference: "",
       },
+      status: "",
       questions: [],
-      unsubscribe: () => {},
+      unsubscribe: [],
     };
   },
   mounted() {
@@ -75,26 +77,37 @@ export default {
           this.$router.push("/play?puzzle=" + this.puzzleId);
         }
       });
-
-    this.unsubscribe = db
-      .collection("puzzles")
-      .doc(this.puzzleId)
-      .collection("questions")
-      .orderBy("timestamp")
-      .onSnapshot((docs) => {
-        this.questions = [];
-        docs.forEach((doc) => {
-          let data = {
-            id: doc.id,
-            content: doc.data().content,
-            answer: doc.data().answer,
-          };
-          this.questions.push(data);
-        });
-      });
+    this.unsubscribe.push(
+      db
+        .collection("puzzles")
+        .doc(this.puzzleId)
+        .onSnapshot((doc) => {
+          this.status = doc.data().status;
+        })
+    );
+    this.unsubscribe.push(
+      db
+        .collection("puzzles")
+        .doc(this.puzzleId)
+        .collection("questions")
+        .orderBy("timestamp")
+        .onSnapshot((docs) => {
+          this.questions = [];
+          docs.forEach((doc) => {
+            let data = {
+              id: doc.id,
+              content: doc.data().content,
+              answer: doc.data().answer,
+            };
+            this.questions.push(data);
+          });
+        })
+    );
   },
   destroyed() {
-    this.unsubscribe();
+    for (const key in this.unsubscribe) {
+      this.unsubscribe[key]();
+    }
   },
   methods: {
     onQuestionSelected(item) {
@@ -103,6 +116,11 @@ export default {
       this.speech.text = item.content;
       window.speechSynthesis.speak(this.speech);
       this.currentQuestion = item;
+    },
+    showSolution() {
+      db.collection("puzzles").doc(this.puzzleId).update({
+        status: "solution",
+      });
     },
   },
 };
