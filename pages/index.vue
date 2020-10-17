@@ -40,7 +40,6 @@ export default {
             .signInAnonymously()
             .then(() => {
               if (this.$route.query.redirect) {
-                alert(this.$route.query.redirect);
                 this.$router.push(this.$route.query.redirect);
               } else {
                 this.$router.push("/dashboard");
