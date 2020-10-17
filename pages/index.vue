@@ -22,7 +22,11 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(() => {
-          this.$router.push("/dashboard");
+          if (this.$route.query.redirect) {
+            this.$router.push(this.$route.query.redirect);
+          } else {
+            this.$router.push("/dashboard");
+          }
         })
         .catch(function (error) {});
     },
@@ -35,7 +39,12 @@ export default {
             .auth()
             .signInAnonymously()
             .then(() => {
-              this.$router.push("/dashboard");
+              if (this.$route.query.redirect) {
+                alert(this.$route.query.redirect);
+                this.$router.push(this.$route.query.redirect);
+              } else {
+                this.$router.push("/dashboard");
+              }
             })
             .catch((err) => {});
         });
