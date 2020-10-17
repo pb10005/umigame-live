@@ -6,6 +6,7 @@
     <div class="card">
       <div class="card-content">
         <nuxt-link to="/create">問題を登録</nuxt-link>
+        <nuxt-link to="/play/entry">問題に参加</nuxt-link>
         <ul class="collection with-header">
           <li class="collection-header font-serif">あなたが登録した問題</li>
           <li class="collection-item" v-for="item in puzzles" :key="item.id">
@@ -34,7 +35,6 @@ export default {
       puzzles: [],
     };
   },
-  middleware: ["auth"],
   mounted() {
     db.collection("puzzles")
       .where("author", "==", firebase.auth().currentUser.uid)

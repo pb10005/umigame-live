@@ -17,7 +17,7 @@
       />
     </ul>
     <div id="puzzle-view">
-      <a class="align-left" href="#" @click="$router.push('/')"
+      <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
       <puzzle-view :puzzle="puzzle" />

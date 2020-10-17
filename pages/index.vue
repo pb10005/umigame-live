@@ -6,8 +6,6 @@
         Googleアカウントでログイン
       </button>
       <button class="btn" @click="loginAsGuest">ゲストログイン</button>
-      <nuxt-link class="btn" to="/dashboard">出題する</nuxt-link>
-      <nuxt-link class="btn" to="/play/entry">参加する</nuxt-link>
     </div>
   </section>
 </template>
@@ -23,12 +21,10 @@ export default {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(function (result) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
+        .then(() => {
+          this.$router.push("/dashboard");
         })
-        .catch(function (error) {
-          // Handle Errors here.
-        });
+        .catch(function (error) {});
     },
     loginAsGuest() {
       firebase
@@ -38,6 +34,9 @@ export default {
           return firebase
             .auth()
             .signInAnonymously()
+            .then(() => {
+              this.$router.push("/dashboard");
+            })
             .catch((err) => {});
         });
     },
