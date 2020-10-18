@@ -5,13 +5,14 @@
         <div class="switch">
           <label>
             すべて
-            <input type="checkbox" />
+            <input type="checkbox" v-model="filtered" />
             <span class="lever"></span>
             未回答
           </label>
         </div>
       </li>
       <chat-view
+        :filter="filtered ? 'new' : 'none'"
         :questions="questions"
         @question-selected="onQuestionSelected"
       />
@@ -75,6 +76,7 @@ export default {
       questions: [],
       unsubscribe: [],
       modal: null,
+      filtered: false,
     };
   },
   mounted() {

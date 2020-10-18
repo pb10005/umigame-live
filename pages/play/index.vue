@@ -5,13 +5,13 @@
         <div class="switch">
           <label>
             すべて
-            <input type="checkbox" />
+            <input type="checkbox" v-model="filtered" />
             <span class="lever"></span>
             未回答
           </label>
         </div>
       </li>
-      <chat-view :questions="questions" />
+      <chat-view :filter="filtered ? 'new' : 'none'" :questions="questions" />
     </ul>
 
     <question-form id="question-form" @submit="submit" />
@@ -56,6 +56,7 @@ export default {
       status: "",
       questions: [],
       unsubscribe: [],
+      filtered: false,
     };
   },
   mounted() {

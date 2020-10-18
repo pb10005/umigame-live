@@ -4,7 +4,7 @@
       href="#"
       @click="onClick(item)"
       class="collection-item"
-      v-for="item in questions"
+      v-for="item in filteredQuestions()"
       :key="item.id"
     >
       <span>
@@ -23,6 +23,7 @@
 <script>
 export default {
   props: {
+    filter: String,
     questions: Array,
   },
   computed: {
@@ -46,6 +47,13 @@ export default {
   methods: {
     onClick(item) {
       this.$emit("question-selected", item);
+    },
+    filteredQuestions() {
+      if (this.filter === "new") {
+        return this.questions.filter((q) => !q.answer);
+      } else {
+        return this.questions;
+      }
     },
   },
 };
