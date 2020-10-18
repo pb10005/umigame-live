@@ -20,13 +20,22 @@
       <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
-      <a href="#" @click="showSolution">解説を出す</a>
+      <a href="#" @click="openModal">解説を出す</a>
       <puzzle-view :puzzle="puzzle" :status="status" />
       <answer-form
         :puzzleId="puzzleId"
         :question="currentQuestion"
         v-if="currentQuestion.id"
       />
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span>解説を出してよろしいですか？</span>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" @click="showSolution">Yes</button>
+        <button class="btn" @click="modal.close()">No</button>
+      </div>
     </div>
   </section>
 </template>
@@ -65,9 +74,12 @@ export default {
       status: "",
       questions: [],
       unsubscribe: [],
+      modal: null,
     };
   },
   mounted() {
+    const elems = document.querySelectorAll(".modal");
+    this.modal = window.M.Modal.init(elems)[0];
     db.collection("puzzles")
       .doc(this.puzzleId)
       .get()
@@ -121,6 +133,10 @@ export default {
       db.collection("puzzles").doc(this.puzzleId).update({
         status: "solution",
       });
+      this.modal.close();
+    },
+    openModal() {
+      this.modal.open();
     },
   },
 };
