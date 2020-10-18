@@ -21,6 +21,7 @@
       <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
+      <a href="#" @click="showProblem">問題文を出す</a>
       <a href="#" @click="openModal">解説を出す</a>
       <puzzle-view :puzzle="puzzle" :status="status" />
       <answer-form
@@ -130,6 +131,11 @@ export default {
       this.speech.text = item.content;
       window.speechSynthesis.speak(this.speech);
       this.currentQuestion = item;
+    },
+    showProblem() {
+      db.collection("puzzles").doc(this.puzzleId).update({
+        status: "problem",
+      });
     },
     showSolution() {
       db.collection("puzzles").doc(this.puzzleId).update({
