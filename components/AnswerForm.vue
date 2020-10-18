@@ -36,17 +36,17 @@ export default {
       this.synth.speak(this.speech);
     },
     yes() {
-      this.speech.text = "Yes";
+      this.speech.text = "イエス";
       this.answer("yes");
       this.synth.speak(this.speech);
     },
     no() {
-      this.speech.text = "No";
+      this.speech.text = "ノー";
       this.answer("no");
       this.synth.speak(this.speech);
     },
     yesno() {
-      this.speech.text = "Yes No";
+      this.speech.text = "イエスノー";
       this.answer("yesno");
       this.synth.speak(this.speech);
     },
