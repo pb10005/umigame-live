@@ -1,7 +1,16 @@
 <template>
   <section class="card grey lighten-4" id="answer">
     <div class="card-content">
-      <div class="content-text teal-text lighten-2">{{ question.content }}</div>
+      <div class="content-text teal-text lighten-2">
+        <span
+          v-if="question.answer"
+          class="new badge"
+          :class="color[question.answer]"
+          data-badge-caption=""
+          >{{ answerText[question.answer] }}</span
+        >
+        {{ question.content }}
+      </div>
     </div>
     <div class="card-action">
       <a class="waves-effect waves-light btn-large" @click="trueAns">正解</a>
@@ -22,6 +31,24 @@ export default {
     question: {
       id: String,
       content: String,
+    },
+  },
+  computed: {
+    color(answer) {
+      return {
+        true_ans: "",
+        yes: "blue",
+        no: "pink",
+        yesno: "grey",
+      };
+    },
+    answerText(answer) {
+      return {
+        true_ans: "正解",
+        yes: "Yes",
+        no: "No",
+        yesno: "YesNo",
+      };
     },
   },
   mounted() {

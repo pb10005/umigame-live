@@ -64,6 +64,7 @@ export default {
       currentQuestion: {
         id: "",
         content: "",
+        answer: "",
       },
       speech: null,
       synth: null,
@@ -115,6 +116,9 @@ export default {
               answer: doc.data().answer,
             };
             this.questions.push(data);
+            if (this.currentQuestion.id === doc.id) {
+              this.currentQuestion = data;
+            }
           });
         })
     );
