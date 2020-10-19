@@ -14,12 +14,12 @@
       <chat-view :filter="filtered ? 'new' : 'none'" :questions="questions" />
     </ul>
 
-    <question-form id="question-form" @submit="submit" />
     <div id="puzzle-view">
       <a class="align-left" href="#" @click="$router.push('/dashboard')"
         ><i class="material-icons">arrow_back</i></a
       >
       <puzzle-view :puzzle="puzzle" :status="status" />
+      <question-form id="question-form" @submit="submit" />
     </div>
   </section>
 </template>
@@ -95,7 +95,9 @@ export default {
     );
   },
   destroyed() {
-    this.unsubscribe();
+    for (const key in this.unsubscribe) {
+      this.unsubscribe[key]();
+    }
   },
   methods: {
     submit(question) {
@@ -122,13 +124,15 @@ export default {
   top: 0;
   left: 30%;
   width: 70%;
+  height: 100vh;
   text-align: left;
+  overflow-y: auto;
 }
 #question-form {
-  position: fixed;
+  padding-top: 10px;
   left: 30%;
-  bottom: 0;
-  width: 70%;
+  right: 0;
+  width: 100%;
 }
 
 #question-button {

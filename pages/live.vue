@@ -163,8 +163,9 @@ export default {
   top: 0;
   left: 30%;
   width: 70%;
-  height: 100%;
+  height: 100vh;
   padding: 5px;
   text-align: left;
+  overflow-y: auto;
 }
 </style>
